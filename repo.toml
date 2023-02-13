@@ -1,0 +1,52 @@
+[repo]
+logging = "debug"
+
+[repo_docs]
+enabled = true
+social_media_set = []
+social_media = []
+favicon = "${root}/assets/favicon.ico"
+logo = "${root}/assets/nvidia-logo-white.png"
+
+sphinx_conf_py_extra = """
+  extensions.extend(["sphinx_copybutton", "sphinx_tabs.tabs", "sphinxcontrib.blockdiag"])
+  blockdiag_fontpath = '/usr/share/fonts/truetype/Roboto-Regular.ttf'
+  blockdiag_antialias = True
+  pygments_style = 'sphinx'
+"""
+
+[repo_docs.projects.cnt]
+docs_root = "${root}"
+root_doc = "contents"
+project = "cloud-native-technologies"
+name = "NVIDIA Cloud Native Technologies"
+version = "2023"
+copyright_start = 2020
+
+sphinx_conf_py_extra = """
+  html_theme_options = { 'titles_only': True, }
+"""
+
+[repo_docs.projects.container-toolkit]
+docs_root = "${root}/container-toolkit"
+project = "container-toolkit"
+name = "NVIDIA Container Toolkit"
+version = "1.12.0"
+copyright_start = 2020
+
+
+[repo_docs.projects.driver-containers]
+docs_root = "${root}/driver-containers"
+project = "driver-containers"
+name = "NVIDIA Driver Containers"
+version = "1.0"
+copyright_start = 2020
+
+
+[repo_docs.projects.gpu-operator]
+docs_root = "${root}/gpu-operator"
+project = "gpu-operator"
+name = "NVIDIA GPU Operator"
+version = "23.0.0"
+copyright_start = 2020
+
