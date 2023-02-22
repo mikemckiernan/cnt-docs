@@ -30,17 +30,20 @@ jobs:
         id: change
         run: |
           diff=$(git diff --name-only HEAD~1)
-          if [[ "${diff}" =~ Dockerfile ]]; then
+          echo "${diff}"
+          if [[ "${diff}" =~ docker/Dockerfile ]]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "image=${REGISTRY}/${IMAGE_NAME}:${TAG}" >> "$GITHUB_OUTPUT"
+            echo "image=${REGISTRY}/${IMAGE_NAME}:${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "image=${REGISTRY}/${IMAGE_NAME}:${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
+            echo "image=${REGISTRY}/${IMAGE_NAME}:${TAG}" >> "$GITHUB_OUTPUT"
+          fi
+          echo "$GITHUB_OUTPUT"
         shell: bash
 
   build-and-push-image:
     needs: dockerfile-changed
-    if: needs.dockerfile-changed.outputs.changed == "true"
+    if: needs.dockerfile-changed.outputs.changed
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -60,6 +63,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          file: docker/Dockerfile
           push: true
           tags: ${{ needs.dockerfile-changed.outputs.image }}
 
@@ -67,7 +71,7 @@ jobs:
     needs: [dockerfile-changed, build-and-push-image]
     if: ${{ always() }}
     runs-on: ubuntu-latest
-    container: 
+    container:
       image: ${{ needs.dockerfile-changed.outputs.image }}
     steps:
       - name: Checkout
@@ -80,6 +84,10 @@ jobs:
       - name: Build docs
         run: |
           make html
+      - name: Delete unnecessary files
+        run: |
+          find _build/html -name .doctrees -prune -exec rm -rf {} \;
+          find _build/html -name .buildinfo -exec rm {} \;
       - name: Upload HTML
         uses: actions/upload-artifact@v3
         with:
@@ -98,3 +106,4 @@ jobs:
         with:
           name: pr
           path: pr/
+
