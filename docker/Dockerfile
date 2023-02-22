@@ -30,5 +30,3 @@ RUN python3 -m pip install --no-cache-dir "sphinx_rtd_theme==1.0.0"
 #Download Roboto https://fonts.google.com/specimen/Roboto
 COPY assets/*.ttf /usr/share/fonts/truetype/
 RUN fc-cache
-
-CMD ["make", "html"]
