@@ -36,7 +36,8 @@ jobs:
       - name: Detect change
         id: change
         run: |
-          diff=$(git diff --name-only HEAD~1)
+          first_commit=$(git rev-list HEAD | tail -n 1)
+          diff=$(git diff --name-only HEAD..${first_commit})
           if [[ "${diff}" =~ docker/Dockerfile ]] && [[ "${{ github.event_name }}" == 'pull_request' ]]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
             echo "image=${REGISTRY}/${IMAGE_NAME}:${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
@@ -48,7 +49,7 @@ jobs:
 
   build-and-push-image:
     needs: dockerfile-changed
-    if: needs.dockerfile-changed.outputs.changed
+    if: needs.dockerfile-changed.outputs.changed == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
