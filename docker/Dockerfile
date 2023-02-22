@@ -4,7 +4,7 @@
 #   --tag ${REGISTRY}/sphinxdoc
 #   --file Dockerfile .
 FROM python:3.9-slim
-LABEL maintainer="Pramod Ramarao <pramarao@nvidia>"
+LABEL maintainer="Pramod Ramarao <pramarao@nvidia>, Mike McKiernan <mmckiernan@nvidia.com>"
 
 WORKDIR /docs
 RUN apt-get update \
