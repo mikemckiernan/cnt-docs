@@ -1,0 +1,100 @@
+name: docs-build
+
+on:
+  pull_request:
+    branches: [master]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  TAG: 0.1.0
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dockerfile-changed:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      changed: ${{ steps.change.outputs.changed }}
+      image: ${{ steps.change.outputs.image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: Detect change
+        id: change
+        run: |
+          diff=$(git diff --name-only HEAD~1)
+          if [[ "${diff}" =~ Dockerfile ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "image=${REGISTRY}/${IMAGE_NAME}:${TAG}" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "image=${REGISTRY}/${IMAGE_NAME}:${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
+        shell: bash
+
+  build-and-push-image:
+    needs: dockerfile-changed
+    if: needs.dockerfile-changed.outputs.changed == "true"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Log in to Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ needs.dockerfile-changed.outputs.image }}
+
+  build-docs:
+    needs: [dockerfile-changed, build-and-push-image]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    container: 
+      image: ${{ needs.dockerfile-changed.outputs.image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Set ownership
+        run: |
+          chown -R $(id -u):$(id -g) $PWD
+      - name: Build docs
+        run: |
+          make html
+      - name: Upload HTML
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-build-artifact
+          path: _build/html
+          if-no-files-found: error
+          retention-days: 1
+      - name: Store PR information
+        run: |
+          mkdir ./pr
+          echo ${{ github.event.number }}              > ./pr/pr.txt
+          echo ${{ github.event.pull_request.merged }} > ./pr/merged.txt
+          echo ${{ github.event.action }}              > ./pr/action.txt
+      - name: Upload PR information
+        uses: actions/upload-artifact@v3
+        with:
+          name: pr
+          path: pr/
