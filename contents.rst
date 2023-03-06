@@ -15,8 +15,9 @@ using NVIDIA GPUs with Kubernetes.
 ..   Documentation home <self>
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
-   :caption: NVIDIA Container Toolkit:
+   :caption: NVIDIA Container Toolkit
 
    container-toolkit/overview.rst
    container-toolkit/concepts.rst
@@ -29,7 +30,7 @@ using NVIDIA GPUs with Kubernetes.
 
 .. toctree::
    :maxdepth: 2
-   :caption: NVIDIA GPU Operator:
+   :caption: NVIDIA GPU Operator
 
    gpu-operator/overview.rst
    gpu-operator/getting-started.rst
@@ -47,20 +48,23 @@ using NVIDIA GPUs with Kubernetes.
    gpu-operator/archive.rst
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
-   :caption: Kubernetes with GPUs:
+   :caption: Kubernetes with GPUs
 
    kubernetes/install-k8s.rst
    kubernetes/mig-k8s.rst
    kubernetes/anthos-guide.rst
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
-   :caption: GPU Telemetry:
+   :caption: GPU Telemetry
 
    gpu-telemetry/dcgm-exporter.rst
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
    :caption: Multi-Instance GPU:
 
@@ -68,19 +72,58 @@ using NVIDIA GPUs with Kubernetes.
    mig/mig-k8s.rst
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
-   :caption: Driver Containers:
+   :caption: Driver Containers
 
    driver-containers/overview.rst
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
-   :caption: Playground:
+   :caption: Playground
 
    playground/dind.rst
    playground/x-arch.rst
 
-.. Indices and tables
-.. ==================
-..
-.. * :ref:`genindex`
+
+Start Here
+----------
+
+
+
+.. grid:: 2
+
+   .. grid-item-card::
+
+      **NVIDIA Container Toolkit**
+      ^^^
+      Some text that helps folks choose.
+      +++
+      Refer to :doc:`Overview and Installation <driver-containers/overview>`
+
+   .. grid-item-card::
+
+      **NVIDIA GPU Operator**
+      ^^^
+      Text that helps orient customers.
+      +++
+      Refer to :doc:`Getting Started <driver-containers/overview>`
+
+.. grid:: 2
+
+   .. grid-item-card::
+
+      **Kubernetes with GPUs**
+      ^^^
+      Orchestration is the best.
+      +++
+      Refer to :doc:`Concepts and Installation <driver-containers/overview>`
+
+   .. grid-item-card::
+
+      **GPU Telemetry**
+      ^^^
+      Telemetry is what all the cool kids use.
+      +++
+      Refer to :doc:`gpu-telemetry/dcgm-exporter`
