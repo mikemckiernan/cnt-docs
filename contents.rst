@@ -16,7 +16,7 @@ using NVIDIA GPUs with Kubernetes.
 
 .. toctree::
    :maxdepth: 2
-   :caption: NVIDIA Container Toolkit:
+   :caption: NVIDIA Container Toolkit
 
    container-toolkit/overview.rst
    container-toolkit/concepts.rst
@@ -29,26 +29,23 @@ using NVIDIA GPUs with Kubernetes.
 
 .. toctree::
    :maxdepth: 2
-   :caption: NVIDIA GPU Operator:
+   :caption: NVIDIA GPU Operator
 
-   gpu-operator/overview.rst
+   About the Operator <gpu-operator/about.rst>
+   Platform Support <gpu-operator/platform-support.rst>
+   Release Notes <gpu-operator/release-notes.rst>
+   Installation <gpu-operator/installation.rst>
    gpu-operator/getting-started.rst
-   gpu-operator/platform-support.rst
-   gpu-operator/release-notes.rst
    gpu-operator/gpu-driver-upgrades.rst
-   gpu-operator/install-gpu-operator-vgpu.rst
-   gpu-operator/install-gpu-operator-nvaie.rst
+   Advanced Configurations <gpu-operator/advanced-configurations.rst>
    gpu-operator/openshift/contents.rst
-   gpu-operator/gpu-operator-mig.rst
-   gpu-operator/gpu-sharing.rst
-   gpu-operator/gpu-operator-rdma.rst
-   gpu-operator/gpu-operator-kubevirt.rst
    gpu-operator/appendix.rst
+   gpu-operator/license.rst
    gpu-operator/archive.rst
 
 .. toctree::
    :maxdepth: 2
-   :caption: Kubernetes with GPUs:
+   :caption: Kubernetes with GPUs
 
    kubernetes/install-k8s.rst
    kubernetes/mig-k8s.rst
@@ -56,26 +53,26 @@ using NVIDIA GPUs with Kubernetes.
 
 .. toctree::
    :maxdepth: 2
-   :caption: GPU Telemetry:
+   :caption: GPU Telemetry
 
    gpu-telemetry/dcgm-exporter.rst
 
 .. toctree::
    :maxdepth: 2
-   :caption: Multi-Instance GPU:
+   :caption: Multi-Instance GPU
 
    mig/mig.rst
    mig/mig-k8s.rst
 
 .. toctree::
    :maxdepth: 2
-   :caption: Driver Containers:
+   :caption: Driver Containers
 
    driver-containers/overview.rst
 
 .. toctree::
    :maxdepth: 2
-   :caption: Playground:
+   :caption: Playground
 
    playground/dind.rst
    playground/x-arch.rst

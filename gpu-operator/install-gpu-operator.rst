@@ -1,13 +1,13 @@
-.. Date: Nov 25 2020
-.. Author: pramarao
+.. headings:  # and #, * and *, =, -, ^
 
 .. _install-gpu-operator:
 
+***************************
 Install NVIDIA GPU Operator
-=============================
+***************************
 
 Install Helm
--------------
+============
 
 The preferred method to deploy the GPU Operator is using ``helm``.
 
@@ -25,7 +25,7 @@ Now, add the NVIDIA Helm repository:
       && helm repo update
 
 Install the GPU Operator
---------------------------
+========================
 
 The GPU Operator Helm chart offers a number of customizable options that can be configured depending on your environment.
 
@@ -43,7 +43,7 @@ The GPU Operator Helm chart offers a number of customizable options that can be 
 .. _gpu-operator-helm-chart-options:
 
 Chart Customization Options
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------
 
 The following options are available when using the Helm chart. These options can be used with ``--set`` when installing via Helm.
 
@@ -118,7 +118,7 @@ The following options are available when using the Helm chart. These options can
 
 
 Namespace
-^^^^^^^^^
+---------
 
 Prior to GPU Operator v1.9, the operator was installed in the ``default`` namespace while all operands were
 installed in the ``gpu-operator-resources`` namespace.
@@ -137,7 +137,7 @@ If a namespace is not specified during installation, all GPU Operator components
 ``default`` namespace.
 
 Operands
-^^^^^^^^
+--------
 
 By default, the GPU Operator operands are deployed on all GPU worker nodes in the cluster.
 GPU worker nodes are identified by the presence of the label ``feature.node.kubernetes.io/pci-10de.present=true``,
@@ -151,12 +151,12 @@ To disable operands from getting deployed on a GPU worker node, label the node w
 
 
 Common Deployment Scenarios
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+===========================
 
 In this section, we present some common deployment recipes when using the Helm chart to install the GPU Operator.
 
 Bare-metal/Passthrough with default configurations on Ubuntu
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+------------------------------------------------------------
 
 In this scenario, the default configuration options are used:
 
@@ -172,7 +172,7 @@ In this scenario, the default configuration options are used:
 
 
 Bare-metal/Passthrough with default configurations on Red Hat Enterprise Linux
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+------------------------------------------------------------------------------
 
 In this scenario, the default configuration options are used:
 
@@ -184,10 +184,10 @@ In this scenario, the default configuration options are used:
 
 .. note::
 
-   * When using RHEL8 with Kubernetes, SELinux has to be enabled (either in permissive or enforcing mode) for use with the GPU Operator. Additionally, network restricted environments are not supported. 
+   * When using RHEL8 with Kubernetes, SELinux has to be enabled (either in permissive or enforcing mode) for use with the GPU Operator. Additionally, network restricted environments are not supported.
 
 Bare-metal/Passthrough with default configurations on CentOS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+------------------------------------------------------------
 
 In this scenario, the CentOS toolkit image is used:
 
@@ -203,10 +203,9 @@ In this scenario, the CentOS toolkit image is used:
    * For CentOS 8 systems, use `toolkit.version=1.7.1-centos8`.
    * Replace `1.7.1` toolkit version used here with the latest one available `here <https://ngc.nvidia.com/catalog/containers/nvidia:k8s:container-toolkit/tags>`_.
 
-----
 
 NVIDIA vGPU
-""""""""""""
+-----------
 
 .. note::
 
@@ -226,18 +225,15 @@ The command below will install the GPU Operator with its default configuration f
         --set driver.imagePullSecrets={$REGISTRY_SECRET_NAME} \
         --set driver.licensingConfig.configMapName=licensing-config
 
-----
 
 NVIDIA AI Enterprise
-"""""""""""""""""""""
+--------------------
 
 Refer to :ref:`GPU Operator with NVIDIA AI Enterprise <install-gpu-operator-nvaie>`.
 
 
-----
-
 Bare-metal/Passthrough with pre-installed NVIDIA drivers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+--------------------------------------------------------
 
 In this example, the user has already pre-installed NVIDIA drivers as part of the system image:
 
@@ -248,12 +244,10 @@ In this example, the user has already pre-installed NVIDIA drivers as part of th
         nvidia/gpu-operator \
         --set driver.enabled=false
 
-----
-
 .. _preinstalled-drivers-and-toolkit:
 
 Bare-metal/Passthrough with pre-installed drivers and NVIDIA Container Toolkit
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+------------------------------------------------------------------------------
 
 In this example, the user has already pre-installed the NVIDIA drivers and NVIDIA Container Toolkit (``nvidia-docker2``)
 as part of the system image.
@@ -328,10 +322,9 @@ Install the GPU operator with the following options:
          --set driver.enabled=false \
          --set toolkit.enabled=false
 
-----
 
 Bare-metal/Passthrough with pre-installed NVIDIA Container Toolkit (but no drivers)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+-----------------------------------------------------------------------------------
 
 In this example, the user has already pre-installed the NVIDIA Container Toolkit (``nvidia-docker2``) as part of the system image.
 
@@ -407,10 +400,9 @@ Once these steps are complete, now install the GPU operator with the following o
         nvidia/gpu-operator \
         --set toolkit.enabled=false
 
-----
 
 Custom driver image (based off a specific driver version)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+---------------------------------------------------------
 
 If you want to use custom driver container images (for e.g. using 465.27), then
 you would need to build a new driver container image. Follow these steps:
@@ -444,10 +436,8 @@ support for such custom configurations.
 
 .. _custom-runtime-options:
 
-----
-
-Custom configuration for runtime ``containerd``
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
+Custom configuration for runtime containerd
+-------------------------------------------
 
 When `containerd` is the container runtime used, the following configuration
 options are used with the container-toolkit deployed with GPU Operator:
