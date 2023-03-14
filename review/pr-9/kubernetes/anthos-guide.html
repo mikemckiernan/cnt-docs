@@ -1200,46 +1200,6 @@ The default value is <code class="docutils literal notranslate"><span class="pre
 <span class="go">    --set-string toolkit.env[3].value=true</span>
 </pre></div>
 </div>
-<hr class="docutils" />
-<p>Refer to the section <a class="reference internal" href="../gpu-operator/install-gpu-operator-proxy.html#install-gpu-operator-proxy"><span class="std std-ref">Install GPU Operator in Proxy Environments</span></a> for more information on how to install the Operator on clusters
-behind a HTTP proxy.</p>
-<hr class="docutils" />
-<p>Refer to the section <a class="reference internal" href="../gpu-operator/install-gpu-operator-air-gapped.html#install-gpu-operator-air-gapped"><span class="std std-ref">Install GPU Operator in Air-gapped Environments</span></a> for more information on how to install the Operator
-in air-gapped environments.</p>
-<hr class="docutils" />
-<p>Refer to the document <a class="reference internal" href="../gpu-operator/gpu-operator-mig.html#install-gpu-operator-mig"><span class="std std-ref">GPU Operator with MIG</span></a> for more information on how use the Operator with Multi-Instance GPU (MIG)
-on NVIDIA Ampere products. For guidance on configuring MIG support for the <strong>NVIDIA GPU Operator</strong> in an OpenShift Container Platform cluster, see the <a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/openshift/mig-ocp.html">user guide</a>.</p>
-<hr class="docutils" />
-<p>Refer to the document <a class="reference internal" href="../gpu-operator/gpu-operator-kubevirt.html#gpu-operator-kubevirt"><span class="std std-ref">GPU Operator with KubeVirt</span></a> for more information on how to use the GPU Operator to provision GPU nodes for running KubeVirt virtual machines with access to GPU.
-For guidance on using the GPU Operator with OpenShift Virtualization, refer to the document <span class="xref std std-ref">nvidia-gpu-operator-openshift-virtualization-vgpu-enablement</span>.</p>
-<p>Refer to the section <a class="reference internal" href="../gpu-operator/install-gpu-operator-outdated-kernels.html#install-gpu-operator-outdated-kernels"><span class="std std-ref">Considerations when Installing with Outdated Kernels in Cluster</span></a> for more information on how to install the Operator successfully
-when nodes in the cluster are not running the latest kernel</p>
-<hr class="docutils" />
-<section id="verify-gpu-operator-install">
-<h5>Verify GPU Operator Install<a class="headerlink" href="#verify-gpu-operator-install" title="Permalink to this heading"></a></h5>
-<p>Once the Helm chart is installed, check the status of the pods to ensure all the containers are running and the validation is complete:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>gpu-operator
-</pre></div>
-</div>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">NAME                                                          READY   STATUS      RESTARTS   AGE</span>
-<span class="go">gpu-feature-discovery-crrsq                                   1/1     Running     0          60s</span>
-<span class="go">gpu-operator-7fb75556c7-x8spj                                 1/1     Running     0          5m13s</span>
-<span class="go">gpu-operator-node-feature-discovery-master-58d884d5cc-w7q7b   1/1     Running     0          5m13s</span>
-<span class="go">gpu-operator-node-feature-discovery-worker-6rht2              1/1     Running     0          5m13s</span>
-<span class="go">gpu-operator-node-feature-discovery-worker-9r8js              1/1     Running     0          5m13s</span>
-<span class="go">nvidia-container-toolkit-daemonset-lhgqf                      1/1     Running     0          4m53s</span>
-<span class="go">nvidia-cuda-validator-rhvbb                                   0/1     Completed   0          54s</span>
-<span class="go">nvidia-dcgm-5jqzg                                             1/1     Running     0          60s</span>
-<span class="go">nvidia-dcgm-exporter-h964h                                    1/1     Running     0          60s</span>
-<span class="go">nvidia-device-plugin-daemonset-d9ntc                          1/1     Running     0          60s</span>
-<span class="go">nvidia-device-plugin-validator-cm2fd                          0/1     Completed   0          48s</span>
-<span class="go">nvidia-driver-daemonset-5xj6g                                 1/1     Running     0          4m53s</span>
-<span class="go">nvidia-mig-manager-89z9b                                      1/1     Running     0          4m53s</span>
-<span class="go">nvidia-operator-validator-bwx99                               1/1     Running     0          58s</span>
-</pre></div>
-</div>
-<p>We can now proceed to running some sample GPU workloads to verify that the Operator (and its components) are working correctly.</p>
-</section>
 </section>
 </section>
 <section id="running-gpu-applications">
@@ -1432,7 +1392,7 @@ will essentially be pinned to the ESXi host which hosts the GPU. vMotion and VMw
 
   <div role="contentinfo">
     <p>&#169; Copyright 2018-2023, NVIDIA Corporation.
-      <span class="lastupdated">Last updated on 2023-03-13.
+      <span class="lastupdated">Last updated on 2023-03-14.
       </span></p>
   </div>
 

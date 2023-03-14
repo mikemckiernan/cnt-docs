@@ -45,6 +45,36 @@ Before installing the GPU Operator on NVIDIA vGPU, check the following prerequis
 
 .. include:: install-gpu-operator.rst
 
+***************************************
+Verifying the GPU Operator Installation
+***************************************
+
+After the Helm chart is installed, check the status of the pods to ensure all the containers are running and the validation is complete:
+
+.. code-block:: console
+
+   $ kubectl get pods -n gpu-operator
+
+.. code-block:: console
+
+   NAME                                                          READY   STATUS      RESTARTS   AGE
+   gpu-feature-discovery-crrsq                                   1/1     Running     0          60s
+   gpu-operator-7fb75556c7-x8spj                                 1/1     Running     0          5m13s
+   gpu-operator-node-feature-discovery-master-58d884d5cc-w7q7b   1/1     Running     0          5m13s
+   gpu-operator-node-feature-discovery-worker-6rht2              1/1     Running     0          5m13s
+   gpu-operator-node-feature-discovery-worker-9r8js              1/1     Running     0          5m13s
+   nvidia-container-toolkit-daemonset-lhgqf                      1/1     Running     0          4m53s
+   nvidia-cuda-validator-rhvbb                                   0/1     Completed   0          54s
+   nvidia-dcgm-5jqzg                                             1/1     Running     0          60s
+   nvidia-dcgm-exporter-h964h                                    1/1     Running     0          60s
+   nvidia-device-plugin-daemonset-d9ntc                          1/1     Running     0          60s
+   nvidia-device-plugin-validator-cm2fd                          0/1     Completed   0          48s
+   nvidia-driver-daemonset-5xj6g                                 1/1     Running     0          4m53s
+   nvidia-mig-manager-89z9b                                      1/1     Running     0          4m53s
+   nvidia-operator-validator-bwx99                               1/1     Running     0          58s
+
+We can now proceed to running some sample GPU workloads to verify that the Operator (and its components) are working correctly.
+
 *******************************
 Running Sample GPU Applications
 *******************************
@@ -364,11 +394,13 @@ The password credentials for the login are available in the ``prometheus.values`
 
 .. _operator-upgrades:
 
-Upgrade
-===========================
 
-Using Helm
------------
+**************************
+Upgrading the GPU Operator
+**************************
+
+Upgrading using Helm
+====================
 
 Starting with GPU Operator v1.8.0, the GPU Operator supports dynamic updates to existing resources. This allows
 the GPU Operator to ensure settings from the `ClusterPolicy` Spec are always applied and current.
@@ -376,8 +408,8 @@ the GPU Operator to ensure settings from the `ClusterPolicy` Spec are always app
 Since Helm does not `support <https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations>`_ auto upgrade of existing CRDs, the user has following options to
 upgrade the GPU Operator chart:
 
-Option 1 - manually upgrade CRD
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Option 1: Manually Upgrade the CRD
+----------------------------------
 
 .. blockdiag::
 
@@ -416,8 +448,8 @@ And upgrade via Helm:
 
    $ helm upgrade gpu-operator -n gpu-operator -f values-22.9.x.yaml
 
-Option 2 - auto upgrade CRD using Helm hook
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Option 2: Automatically Upgrade the CRD using a Helm Hook
+---------------------------------------------------------
 
 Starting with GPU Operator v22.09, a ``pre-upgrade`` Helm `hook <https://helm.sh/docs/topics/charts_hooks/#the-available-hooks>`_ is utilized to automatically upgrade to latest CRD.
 A new parameter ``operator.upgradeCRD`` is added to to trigger this hook during GPU Operator upgrade using Helm. This is disabled by default.
@@ -442,7 +474,7 @@ Fetch latest values from the chart (replace the ``.x`` below with the desired ve
      In this case, chart needs to be deleted using ``--no-hooks`` option to avoid deletion to be hung on hook failures.
 
 Cluster Policy Updates
-^^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 The GPU Operator also supports dynamic updates to the ``ClusterPolicy`` CustomResource using ``kubectl``:
 
@@ -453,7 +485,7 @@ The GPU Operator also supports dynamic updates to the ``ClusterPolicy`` CustomRe
 After the edits are complete, Kubernetes will automatically apply the updates to cluster.
 
 Additional Controls for Driver Upgrades
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------
 
 While most of the GPU Operator managed daemonsets can be upgraded seamlessly, the NVIDIA driver daemonset has special considerations.
 Refer to :ref:`gpu_driver_upgrades` to learn more about how to upgrade drivers with the GPU Operator.
@@ -465,8 +497,10 @@ For upgrading the GPU Operator when running in OpenShift, refer to the official 
 https://docs.openshift.com/container-platform/4.8/operators/admin/olm-upgrading-operators.html
 
 
-Uninstall
-===========================
+
+*****************************
+Uninstalling the GPU Operator
+*****************************
 
 To uninstall the operator:
 
