@@ -5,7 +5,7 @@ Advanced Configurations for NVIDIA GPU Operator
 ###############################################
 
 .. toctree::
-   :maxdepth: 1
+   :titlesonly:
 
    install-gpu-operator-vgpu.rst
    gpu-operator-rdma.rst

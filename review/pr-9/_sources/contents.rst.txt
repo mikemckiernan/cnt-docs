@@ -28,7 +28,7 @@ using NVIDIA GPUs with Kubernetes.
    container-toolkit/archive.rst
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: NVIDIA GPU Operator
 
    About the Operator <gpu-operator/about.rst>
