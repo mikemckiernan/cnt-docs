@@ -90,9 +90,8 @@ html_show_sourcelink = False
 #
 html_theme_options = {
     'canonical_url': 'https://docs.nvidia.com/datacenter/cloud-native/',
-    'collapse_navigation': True,
+    'collapse_navigation': False,
     'sticky_navigation': True,
-    'display_version': False,
     'logo_only': True,
     'navigation_depth': 2,
     'includehidden': True,
