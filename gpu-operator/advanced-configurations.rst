@@ -1,15 +1,12 @@
 .. headings:  # and #, * and *, =, -, ^
 
-###############################################
-Advanced Configurations for NVIDIA GPU Operator
-###############################################
+###################################################
+Advanced Configurations for the NVIDIA GPU Operator
+###################################################
 
-.. toctree::
-   :maxdepth: 1
-
-   install-gpu-operator-vgpu.rst
-   gpu-operator-rdma.rst
-   install-gpu-operator-nvaie.rst
-   gpu-operator-mig.rst
-   gpu-sharing.rst
-   gpu-operator-kubevirt.rst
+   - :doc:`install-gpu-operator-vgpu`
+   - :doc:`gpu-operator-rdma`
+   - :doc:`install-gpu-operator-nvaie`
+   - :doc:`gpu-operator-mig`
+   - :doc:`gpu-sharing`
+   - :doc:`gpu-operator-kubevirt`

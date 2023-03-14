@@ -3,9 +3,9 @@
 
 .. _install-gpu-operator-vgpu:
 
-##################
-NVIDIA vGPU
-##################
+###########################################
+Installing the NVIDIA GPU Operator and vGPU
+###########################################
 
 This document provides an overview of the workflow to getting started with using the GPU Operator with NVIDIA vGPU.
 
@@ -112,18 +112,18 @@ Set the version of the CUDA base image used when building the driver container:
    and does not have any correlation to the version of CUDA associated with / supported by the
    resulting driver container.
 
-Replace the ``VGPU_DRIVER_VERSION`` below with the appropriate Linux guest vGPU driver version downloaded 
-from the NVIDIA software portal. In this example, the ``525.60.13`` driver has been downloaded. Note that 
+Replace the ``VGPU_DRIVER_VERSION`` below with the appropriate Linux guest vGPU driver version downloaded
+from the NVIDIA software portal. In this example, the ``525.60.13`` driver has been downloaded. Note that
 the ``-grid`` suffix needs to be added to the environment variable as shown:
 
 .. code-block:: console
 
-    $ export VGPU_DRIVER_VERSION=525.60.13-grid 
+    $ export VGPU_DRIVER_VERSION=525.60.13-grid
 
 .. note::
 
     GPU Operator automatically selects the compatible guest driver version from the drivers bundled with the ``driver`` image.
-    If version check is disabled with ``--build-arg DISABLE_VGPU_VERSION_CHECK=true`` when building driver image, then 
+    If version check is disabled with ``--build-arg DISABLE_VGPU_VERSION_CHECK=true`` when building driver image, then
     ``VGPU_DRIVER_VERSION`` value is used as default.
 
 Build the driver container image

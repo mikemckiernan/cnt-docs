@@ -1,0 +1,32 @@
+root: contents
+defaults:
+  titlesonly: True
+
+subtrees:
+  - caption: GPU Operator
+    entries:
+      - file: gpu-operator/about.rst
+        title: About the Operator
+      - file: gpu-operator/platform-support.rst
+        title: Platform Support
+      - file: gpu-operator/release-notes.rst
+        title: Release Notes
+      - file: gpu-operator/installation.rst
+        title: Installation
+      - file: gpu-operator/getting-started.rst
+      - file: gpu-operator/gpu-driver-upgrades.rst
+      - file: gpu-operator/advanced-configurations.rst
+        title: Advanced Configurations
+        subtrees:
+          - entries:
+              - file: gpu-operator/install-gpu-operator-vgpu.rst
+              - file: gpu-operator/gpu-operator-rdma.rst
+              - file: gpu-operator/install-gpu-operator-nvaie.rst
+              - file: gpu-operator/gpu-operator-mig.rst
+              - file: gpu-operator/gpu-sharing.rst
+              - file: gpu-operator/gpu-operator-kubevirt.rst
+      - file: gpu-operator/openshift/contents.rst
+        title: Red Hat OpenShift
+      - file: gpu-operator/appendix.rst
+      - file: gpu-operator/license.rst
+      - file: gpu-operator/archive.rst

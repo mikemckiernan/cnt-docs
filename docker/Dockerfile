@@ -18,11 +18,12 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install --no-cache-dir -U pip
-RUN python3 -m pip install --no-cache-dir "Sphinx<=4.6" Pillow
+RUN python3 -m pip install --no-cache-dir "Sphinx==5.3.0" Pillow
 RUN python3 -m pip install --no-cache-dir sphinx-copybutton
 RUN python3 -m pip install --no-cache-dir sphinx-tabs
 RUN python3 -m pip install --no-cache-dir sphinxcontrib-blockdiag
 RUN python3 -m pip install --no-cache-dir "sphinx_rtd_theme==1.0.0"
+RUN python3 -m pip install --no-cache-dir "sphinx_external_toc<=0.4.0"
 
 # Install fonts for blockdiag
 #Download IBM Plex
