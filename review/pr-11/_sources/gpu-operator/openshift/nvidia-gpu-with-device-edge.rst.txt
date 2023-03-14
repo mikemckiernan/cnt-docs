@@ -9,11 +9,16 @@
 Accelerating workloads with NVIDIA GPUs with Red Hat Device Edge
 ###############################################################
 
-.. note:: Developer Preview features are not supported with Red Hat production service level agreements (SLAs) and are not functionally complete. Red Hat does not advise using them in a production setting. Developer Preview features provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process. These releases may not have any documentation, and testing is limited. Red Hat may provide ways to submit feedback on Developer Preview releases without an associated SLA.
+.. contents::
+   :depth: 2
+   :local:
+   :backlinks: none
 
 **************
 Introduction
 **************
+
+.. note:: Developer Preview features are not supported with Red Hat production service level agreements (SLAs) and are not functionally complete. Red Hat does not advise using them in a production setting. Developer Preview features provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process. These releases may not have any documentation, and testing is limited. Red Hat may provide ways to submit feedback on Developer Preview releases without an associated SLA.
 
 Red Hat has released Red Hat Device Edge, which provides access to MicroShift. MicroShift offers the simplicity of single-node deployment with the functionality and services you need for computing in resource-constrained locations. You can have many deployments on different hosts, creating the specific system image needed for each of your applications. Installing MicroShift on top of your managed RHEL devices in hard-to-service locations also allows for streamlined over-the-air updates.
 

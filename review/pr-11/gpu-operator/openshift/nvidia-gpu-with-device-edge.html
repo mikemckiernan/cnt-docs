@@ -117,21 +117,26 @@
 <li class="toctree-l1"><a class="reference internal" href="../../kubernetes/mig-k8s.html">MIG Support in Kubernetes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../kubernetes/anthos-guide.html">NVIDIA GPUs with Google Cloud’s Anthos</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Red Hat OpenShift</span></p>
+<p class="caption" role="heading"><span class="caption-text">NVIDIA GPUs and Red Hat OpenShift</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="contents.html">GPU Operator on OpenShift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steps-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-nfd.html">Installing the Node Feature Discovery (NFD) Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-gpu-ocp.html">Installing the NVIDIA GPU Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nvaie-with-ocp.html">NVIDIA AI Enterprise with OpenShift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mig-ocp.html">MIG Support in OpenShift Container Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clean-up.html">Cleanup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-gpu-ocp-disconnected.html">Deploy GPU Operators in a disconnected or airgapped environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enable-gpu-op-dashboard.html">Enable the GPU Operator Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-slicing-gpus-in-openshift.html">Time-slicing NVIDIA GPUs in OpenShift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openshift-virtualization.html">NVIDIA GPU Operator with OpenShift Virtualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting-gpu-ocp.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix-ocp.html">Appendix</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Red Hat Device Edge</span></p>
+<p class="caption" role="heading"><span class="caption-text">NVIDIA GPUs and Red Hat Device Edge</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Accelerating workloads with NVIDIA GPUs with Red Hat Device Edge</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-the-nvidia-gpu-driver">Installing the NVIDIA GPU driver</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-the-nvidia-container-toolkit">Installing the NVIDIA Container Toolkit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-the-nvidia-device-plugin">Installing the NVIDIA Device Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-a-gpu-accelerated-workload-on-red-hat-device-edge">Running a GPU-accelerated workload on Red Hat Device Edge</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Accelerating workloads with NVIDIA GPUs</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">GPU Telemetry:</span></p>
 <ul>
@@ -178,12 +183,22 @@
              
   <section id="accelerating-workloads-with-nvidia-gpus-with-red-hat-device-edge">
 <span id="mirror-gpu-ocp-disconnected"></span><h1>Accelerating workloads with NVIDIA GPUs with Red Hat Device Edge<a class="headerlink" href="#accelerating-workloads-with-nvidia-gpus-with-red-hat-device-edge" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#prerequisites" id="id2">Prerequisites</a></p></li>
+<li><p><a class="reference internal" href="#installing-the-nvidia-gpu-driver" id="id3">Installing the NVIDIA GPU driver</a></p></li>
+<li><p><a class="reference internal" href="#installing-the-nvidia-container-toolkit" id="id4">Installing the NVIDIA Container Toolkit</a></p></li>
+<li><p><a class="reference internal" href="#installing-the-nvidia-device-plugin" id="id5">Installing the NVIDIA Device Plugin</a></p></li>
+<li><p><a class="reference internal" href="#running-a-gpu-accelerated-workload-on-red-hat-device-edge" id="id6">Running a GPU-accelerated workload on Red Hat Device Edge</a></p></li>
+</ul>
+</div>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Developer Preview features are not supported with Red Hat production service level agreements (SLAs) and are not functionally complete. Red Hat does not advise using them in a production setting. Developer Preview features provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process. These releases may not have any documentation, and testing is limited. Red Hat may provide ways to submit feedback on Developer Preview releases without an associated SLA.</p>
 </div>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <p>Red Hat has released Red Hat Device Edge, which provides access to MicroShift. MicroShift offers the simplicity of single-node deployment with the functionality and services you need for computing in resource-constrained locations. You can have many deployments on different hosts, creating the specific system image needed for each of your applications. Installing MicroShift on top of your managed RHEL devices in hard-to-service locations also allows for streamlined over-the-air updates.</p>
 <p>Red Hat Device Edge combines light-weight Kubernetes using MicroShift with Red Hat Enterprise Linux at the edge. MicroShift is a Kubernetes implementation derived from OpenShift, focusing on a minimal  footprint. Red Hat Device Edge addresses the needs of bare metal, virtual, containerized, or kubernetes workloads deployed to resource constrained environments.</p>
 <p>The procedures described on this page tell you how to enable NVIDIA GPUs on an x86 system
